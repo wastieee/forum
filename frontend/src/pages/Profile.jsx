@@ -34,7 +34,7 @@ export default function Profile({ username, onLogout, onBack, theme, toggleTheme
   return (
     <div className="home">
       <header className="navbar">
-        <span className="navbar-logo" onClick={onBack}>⬡ Форум</span>
+        <span className="navbar-logo" onClick={onBack}>Pulse</span>
         <div className="navbar-right">
           <button className="logout-btn" onClick={onBack}>← Назад</button>
           <button className="theme-toggle" onClick={toggleTheme} title="Сменить тему">

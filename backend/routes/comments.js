@@ -34,4 +34,13 @@ router.post('/:postId', authMiddleware, (req, res) => {
   res.json(comment);
 });
 
+router.delete('/:id', authMiddleware, (req, res) => {
+  const comment = db.prepare('SELECT * FROM comments WHERE id = ?').get(req.params.id);
+  if (!comment) return res.status(404).json({ error: 'Комментарий не найден' });
+  if (comment.user_id !== req.user.id && !req.user.is_admin) return res.status(403).json({ error: 'Это не твой комментарий' });
+
+  db.prepare('DELETE FROM comments WHERE id = ?').run(req.params.id);
+  res.json({ success: true });
+});
+
 module.exports = router;

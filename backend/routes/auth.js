@@ -21,7 +21,7 @@ router.post('/register', (req, res) => {
   const hash = bcrypt.hashSync(password, 10);
   const result = db.prepare('INSERT INTO users (username, password) VALUES (?, ?)').run(username, hash);
 
-  const token = jwt.sign({ id: result.lastInsertRowid, username }, SECRET, { expiresIn: '7d' });
+  const token = jwt.sign({ id: result.lastInsertRowid, username, is_admin: 0 }, SECRET, { expiresIn: '7d' });
   res.json({ token, username });
 });
 
@@ -38,7 +38,7 @@ router.post('/login', (req, res) => {
     return res.status(400).json({ error: 'Неверный логин или пароль' });
   }
 
-  const token = jwt.sign({ id: user.id, username: user.username }, SECRET, { expiresIn: '7d' });
+  const token = jwt.sign({ id: user.id, username: user.username, is_admin: user.is_admin || 0 }, SECRET, { expiresIn: '7d' });
   res.json({ token, username: user.username });
 });
 

@@ -25,7 +25,7 @@ export default function Login({ onAuth, switchToRegister, theme, toggleTheme }) 
         <button className="theme-toggle auth-theme-toggle" onClick={toggleTheme}>
           {theme === 'dark' ? '☀️' : '🌙'}
         </button>
-        <div className="auth-logo">⬡ Форум</div>
+        <div className="auth-logo">Pulse</div>
         <h2>Войти</h2>
         <p className="auth-subtitle">Добро пожаловать обратно</p>
         <form onSubmit={handleSubmit}>
